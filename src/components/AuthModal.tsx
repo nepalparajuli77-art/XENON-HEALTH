@@ -575,45 +575,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 </div>
               </div>
 
-              {/* Quick Login Assist Chips */}
-              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800 space-y-2">
-                <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 block">
-                  {language === 'np' ? 'द्रुत लगइन छनौट (Quick Test Accounts):' : 'Quick Test Accounts:'}
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLoginIdentifier('staff');
-                      setLoginPassword('12admin34');
-                    }}
-                    className="px-2.5 py-1 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 hover:bg-amber-200 dark:hover:bg-amber-900/60 text-[11px] font-bold border border-amber-300 dark:border-amber-800 transition-all cursor-pointer flex items-center gap-1"
-                  >
-                    <span>🛡️ Staff (staff / 12admin34)</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLoginIdentifier('nepal.parajuli.77@gmail.com');
-                      setLoginPassword('1admin234');
-                    }}
-                    className="px-2.5 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-200 hover:bg-emerald-200 dark:hover:bg-emerald-900/60 text-[11px] font-bold border border-emerald-300 dark:border-emerald-800 transition-all cursor-pointer flex items-center gap-1"
-                  >
-                    <span>👤 Patient (Nepal Parajuli)</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLoginIdentifier('dr_ramesh');
-                      setLoginPassword('1admin234');
-                    }}
-                    className="px-2.5 py-1 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-900 dark:text-blue-200 hover:bg-blue-200 dark:hover:bg-blue-900/60 text-[11px] font-bold border border-blue-300 dark:border-blue-800 transition-all cursor-pointer flex items-center gap-1"
-                  >
-                    <span>🩺 Doctor (Dr. Ramesh)</span>
-                  </button>
-                </div>
-              </div>
-
               <button
                 type="submit"
                 disabled={loading}
