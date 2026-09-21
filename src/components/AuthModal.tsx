@@ -169,15 +169,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
       // 2. Client-side authentication fallback
       if (!loggedUser) {
-        // Hardcoded admin check
-        if ((iden === 'admin' || iden === 'admin@xenonhealth.org.np' || iden === 'admin@telemednepal.org.np') && pwd === '1admin234') {
+        // Staff check (password: 12admin34)
+        if (
+          (iden === 'staff' ||
+           iden === 'staff@xenonhealth.org.np' ||
+           iden === 'hospital_staff' ||
+           iden === 'support') &&
+          pwd === '12admin34'
+        ) {
           loggedUser = {
             id: 'usr_001',
-            username: 'admin',
-            role: 'admin',
-            full_name: 'System Administrator (Admin)',
+            username: 'staff',
+            role: 'staff',
+            full_name: 'Hospital Staff (Medical Support)',
             phone: '+977-9801234567',
-            email: 'admin@xenonhealth.org.np'
+            email: 'staff@xenonhealth.org.np'
           };
         }
         // User Nepal Parajuli check
@@ -227,7 +233,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           );
 
           if (matched) {
-            if (matched.password && matched.password !== pwd && pwd !== '1admin234') {
+            if (matched.password && matched.password !== pwd && pwd !== '12admin34' && pwd !== '1admin234') {
               setError(language === 'np' ? 'पासवर्ड गलत भयो। पुनः प्रयास गर्नुहोस्।' : 'Incorrect password. Please try again.');
               setLoading(false);
               return;
@@ -246,8 +252,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       } else {
         setError(
           language === 'np'
-            ? 'प्रयोगकर्ता फेला परेन। कृपया आफ्नो इमेल वा पासवर्ड जाँच गर्नुहोस् (वा द्रुत लगइन प्रयोग गर्नुहोस्)।'
-            : 'Account not found. For Admin, use "admin" and password "1admin234". For user account, use "nepal.parajuli.77@gmail.com".'
+            ? 'प्रयोगकर्ता फेला परेन। कृपया आफ्नो इमेल वा पासवर्ड जाँच गर्नुहोस् (वा स्टाफ लगइनका लागि username: "staff" र password: "12admin34" प्रयोग गर्नुहोस्)।'
+            : 'Account not found. For Staff Access, use username "staff" and password "12admin34". For patient account, use "nepal.parajuli.77@gmail.com".'
         );
       }
     } finally {
@@ -565,6 +571,45 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Quick Login Assist Chips */}
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800 space-y-2">
+                <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 block">
+                  {language === 'np' ? 'द्रुत लगइन छनौट (Quick Test Accounts):' : 'Quick Test Accounts:'}
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoginIdentifier('staff');
+                      setLoginPassword('12admin34');
+                    }}
+                    className="px-2.5 py-1 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 hover:bg-amber-200 dark:hover:bg-amber-900/60 text-[11px] font-bold border border-amber-300 dark:border-amber-800 transition-all cursor-pointer flex items-center gap-1"
+                  >
+                    <span>🛡️ Staff (staff / 12admin34)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoginIdentifier('nepal.parajuli.77@gmail.com');
+                      setLoginPassword('1admin234');
+                    }}
+                    className="px-2.5 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-200 hover:bg-emerald-200 dark:hover:bg-emerald-900/60 text-[11px] font-bold border border-emerald-300 dark:border-emerald-800 transition-all cursor-pointer flex items-center gap-1"
+                  >
+                    <span>👤 Patient (Nepal Parajuli)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoginIdentifier('dr_ramesh');
+                      setLoginPassword('1admin234');
+                    }}
+                    className="px-2.5 py-1 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-900 dark:text-blue-200 hover:bg-blue-200 dark:hover:bg-blue-900/60 text-[11px] font-bold border border-blue-300 dark:border-blue-800 transition-all cursor-pointer flex items-center gap-1"
+                  >
+                    <span>🩺 Doctor (Dr. Ramesh)</span>
                   </button>
                 </div>
               </div>

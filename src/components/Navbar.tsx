@@ -132,14 +132,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                 >
                   <div
                     className={`w-8 h-8 rounded-full text-white flex items-center justify-center text-xs font-black shadow-xs ${
-                      currentUser.role === 'admin'
-                        ? 'bg-gradient-to-br from-amber-500 via-red-600 to-red-700 ring-2 ring-amber-400/50'
+                      currentUser.role === 'staff'
+                        ? 'bg-gradient-to-br from-amber-500 via-orange-600 to-red-600 ring-2 ring-amber-400/50'
                         : currentUser.role === 'doctor'
                         ? 'bg-gradient-to-br from-blue-600 to-indigo-700 ring-2 ring-blue-400/40'
                         : 'bg-gradient-to-br from-red-600 to-blue-700'
                     }`}
                   >
-                    {currentUser.role === 'admin' ? '👑' : currentUser.full_name.charAt(0)}
+                    {currentUser.role === 'staff' ? '🛡️' : currentUser.full_name.charAt(0)}
                   </div>
                   <div className="text-left hidden md:block max-w-[130px]">
                     <div className="text-xs font-black text-slate-950 dark:text-white leading-tight truncate">
@@ -148,8 +148,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <div className="text-[10px] text-slate-600 dark:text-slate-400 capitalize font-bold flex items-center gap-1">
                       <span
                         className={`inline-block w-1.5 h-1.5 rounded-full ${
-                          currentUser.role === 'admin'
-                            ? 'bg-red-500'
+                          currentUser.role === 'staff'
+                            ? 'bg-amber-500'
                             : currentUser.role === 'doctor'
                             ? 'bg-blue-500'
                             : 'bg-emerald-500'
@@ -174,9 +174,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                           <div className="font-bold text-slate-950 dark:text-white truncate">
                             {currentUser.full_name}
                           </div>
-                          {currentUser.role === 'admin' && (
-                            <span className="px-1.5 py-0.5 rounded bg-red-600 text-white text-[9px] font-black uppercase">
-                              Admin
+                          {currentUser.role === 'staff' && (
+                            <span className="px-1.5 py-0.5 rounded bg-amber-600 text-white text-[9px] font-black uppercase">
+                              Staff Access
                             </span>
                           )}
                         </div>

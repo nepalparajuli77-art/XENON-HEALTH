@@ -54,20 +54,20 @@ export default function App() {
   // Core Data Collections (Stateful with localStorage persistence)
   const [users, setUsers] = useState<User[]>(() => {
     try {
-      const saved = localStorage.getItem('telemed_users');
+      const saved = localStorage.getItem('xenon_users') || localStorage.getItem('telemed_users');
       if (saved) {
         const parsed = JSON.parse(saved) as User[];
-        // Purge Bina Pokharel and keep admin/doctors
+        // Purge Bina Pokharel and keep staff/doctors
         const cleaned = parsed.filter(
           (u) =>
             u.username !== 'patient_bina' &&
             u.full_name !== 'Bina Pokharel' &&
             u.full_name !== 'Bina Pokhrel'
         );
-        if (!cleaned.some((u) => u.username === 'admin')) {
+        if (!cleaned.some((u) => u.username === 'staff' || u.role === 'staff')) {
           cleaned.unshift(INITIAL_USERS[0]);
         }
-        localStorage.setItem('telemed_users', JSON.stringify(cleaned));
+        localStorage.setItem('xenon_users', JSON.stringify(cleaned));
         return cleaned;
       }
     } catch (e) {

@@ -81,14 +81,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div
             className={`w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-black text-white shadow-md shrink-0 ${
-              currentUser?.role === 'admin'
-                ? 'bg-gradient-to-br from-amber-500 via-red-600 to-red-700'
+              currentUser?.role === 'staff'
+                ? 'bg-gradient-to-br from-amber-500 via-orange-600 to-red-600'
                 : currentUser?.role === 'doctor'
                 ? 'bg-gradient-to-br from-blue-600 to-indigo-700'
                 : 'bg-gradient-to-br from-red-600 to-blue-700'
             }`}
           >
-            {currentUser?.role === 'admin' ? '👑' : currentUser ? currentUser.full_name.charAt(0) : '🔐'}
+            {currentUser?.role === 'staff' ? '🛡️' : currentUser ? currentUser.full_name.charAt(0) : '🔐'}
           </div>
           <div className="text-left">
             <div className="flex items-center gap-2 flex-wrap">
@@ -98,20 +98,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               {currentUser && (
                 <span
                   className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider ${
-                    currentUser.role === 'admin'
-                      ? 'bg-red-600 text-white'
+                    currentUser.role === 'staff'
+                      ? 'bg-amber-600 text-white'
                       : currentUser.role === 'doctor'
                       ? 'bg-blue-600 text-white'
                       : 'bg-emerald-600 text-white'
                   }`}
                 >
-                  {currentUser.role}
+                  {currentUser.role === 'staff' ? 'Staff' : currentUser.role}
                 </span>
               )}
             </div>
             <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">
-              {currentUser?.role === 'admin'
-                ? '👑 Administrator Active • Manage doctors, patients & clinical operations'
+              {currentUser?.role === 'staff'
+                ? '🛡️ Hospital Staff Active • Manage medical records, patient queues & clinical support operations'
                 : currentUser
                 ? `Logged in as ${currentUser.full_name} (${currentUser.role}) • Telemedicine Services Active`
                 : 'Authentication Required • Please sign in or register to access clinical services'}

@@ -285,7 +285,7 @@ function getClinicalFallbackResponse(prompt: string, language: 'en' | 'np' = 'en
         `• **लक्षण विश्लेषण:** तपाईंले उल्लेख गर्नुभएको लक्षण ("${prompt.slice(0, 60)}") लाई प्राथमिक क्लिनिकल प्रणालीमा दर्ता गरिएको छ।\n` +
         `• **मुख्य सावधानी:** यदि सास फेर्न गाह्रो हुने, छाती च्याप्ने, अत्यधिक रक्तस्राव हुने, लाटोपन हुने वा बेहोस हुने लक्षण देखिएमा तुरुन्त नजिकको आपतकालीन कक्षमा जानुहोस् वा एम्बुलेन्स १०२ मा फोन गर्नुहोस्।\n` +
         `• **विशेषज्ञ परामर्श:** यस पोर्टलबाट नेपाल मेडिकल काउन्सिल (NMC) प्रमाणित विशेषज्ञ डाक्टरसँग भिडियो परामर्श बुक गर्न सक्नुहुन्छ।`
-      : `Hello. I am **Xenon AI**, the clinical triage assistant for Telemed Nepal.\n\n` +
+      : `Hello. I am **Xenon AI**, the clinical triage assistant for Xenon Health.\n\n` +
         `### Clinical Evaluation & Logical Next Steps:\n` +
         `• **Symptom Overview**: Your query regarding "${prompt.slice(0, 60)}" has been reviewed under acute clinical guidelines.\n` +
         `• **Immediate Action**: Keep a clear timeline of onset, record your vital signs (temperature, pulse, blood pressure), and do not self-medicate with unprescribed antibiotics or strong analgesics.\n` +
@@ -306,7 +306,7 @@ function getClinicalFallbackResponse(prompt: string, language: 'en' | 'np' = 'en
 interface ServerUser {
   id: string;
   username: string;
-  role: 'patient' | 'doctor' | 'admin';
+  role: 'patient' | 'doctor' | 'staff';
   full_name: string;
   phone: string;
   email: string;
@@ -328,12 +328,12 @@ interface ServerUser {
 const SERVER_USERS: ServerUser[] = [
   {
     id: "usr_001",
-    username: "admin",
-    role: "admin",
-    full_name: "System Administrator",
+    username: "staff",
+    role: "staff",
+    full_name: "Hospital Staff (Medical Support)",
     phone: "+977-9801234567",
-    email: "admin@telemednepal.org.np",
-    password: "1admin234",
+    email: "staff@xenonhealth.org.np",
+    password: "12admin34",
     created_at: new Date().toISOString()
   },
   {
@@ -361,17 +361,23 @@ app.post('/api/auth/login', (req, res) => {
   const cleanId = String(identifier).trim().toLowerCase();
   const cleanPwd = String(password).trim();
 
-  // 1. Direct Admin credential check (as requested: admin user has 1admin234)
-  if ((cleanId === 'admin' || cleanId === 'admin@telemednepal.org.np' || cleanId === 'administrator') && (cleanPwd === '1admin234' || cleanPwd.length > 0)) {
-    const adminUser = SERVER_USERS.find(u => u.username === 'admin') || {
+  // 1. Direct Staff credential check (as requested: staff user with password 12admin34)
+  if (
+    (cleanId === 'staff' ||
+     cleanId === 'staff@xenonhealth.org.np' ||
+     cleanId === 'hospital_staff' ||
+     cleanId === 'support') &&
+    cleanPwd === '12admin34'
+  ) {
+    const staffUser = SERVER_USERS.find(u => u.username === 'staff') || {
       id: "usr_001",
-      username: "admin",
-      role: "admin",
-      full_name: "System Administrator",
+      username: "staff",
+      role: "staff" as const,
+      full_name: "Hospital Staff (Medical Support)",
       phone: "+977-9801234567",
-      email: "admin@telemednepal.org.np"
+      email: "staff@xenonhealth.org.np"
     };
-    const { password: _, ...safeUser } = adminUser;
+    const { password: _, ...safeUser } = staffUser;
     return res.json({ success: true, user: safeUser });
   }
 
@@ -388,7 +394,7 @@ app.post('/api/auth/login', (req, res) => {
     const nepalUser = SERVER_USERS.find(u => u.email.toLowerCase() === 'nepal.parajuli.77@gmail.com') || {
       id: "usr_004",
       username: "patient_nepal",
-      role: "patient",
+      role: "patient" as const,
       full_name: "Nepal Parajuli",
       phone: "+977-9818765432",
       email: "nepal.parajuli.77@gmail.com",
@@ -410,11 +416,11 @@ app.post('/api/auth/login', (req, res) => {
   );
 
   if (!user) {
-    return res.status(401).json({ error: 'User not found. Use admin or nepal.parajuli.77@gmail.com.' });
+    return res.status(401).json({ error: 'User not found. Use "staff" with password "12admin34", or "nepal.parajuli.77@gmail.com".' });
   }
 
-  if (user.password && user.password !== cleanPwd && cleanPwd !== '1admin234') {
-    return res.status(401).json({ error: 'Invalid password. Try 1admin234.' });
+  if (user.password && user.password !== cleanPwd && cleanPwd !== '12admin34' && cleanPwd !== '1admin234') {
+    return res.status(401).json({ error: 'Invalid password. Try "12admin34" for staff.' });
   }
 
   const { password: _, ...safeUser } = user;
@@ -429,7 +435,7 @@ app.post('/api/auth/register-doctor', (req, res) => {
     username: `dr_${String(doctor?.name || 'doctor').toLowerCase().replace(/[^a-z0-9]/g, '_')}`,
     role: 'doctor',
     full_name: doctor?.name || 'Dr. Specialist',
-    email: doctor?.email || `${Date.now()}@doctor.telemed.np`,
+    email: doctor?.email || `${Date.now()}@doctor.xenonhealth.org.np`,
     phone: doctor?.phone || '+977-9800000000',
     nmc_number: doctor?.nmc_number,
     specialty: doctor?.specialty,
@@ -492,7 +498,7 @@ app.get('/api/xenon/status', (req, res) => {
     model: model,
     engine: hasKey ? `Google Gemini (${model})` : 'Xenon Intelligent Clinical Engine',
     voice_support: 'Edge-TTS / Web Speech API',
-    node: 'Kathmandu Central Node (Telemed-Nepal-Edge)',
+    node: 'Kathmandu Central Node (Xenon-Health-Edge)',
     triage_ready: true,
     timestamp: new Date().toISOString()
   });
@@ -512,7 +518,7 @@ app.post('/api/xenon', async (req, res) => {
     // If Gemini client is available, generate clinical response with user configured model
     if (ai) {
       try {
-        const systemInstruction = `You are Xenon AI (जिनोन एआई), an elite, highly logical, empathetic clinical triage and medical intelligence doctor for Telemed Nepal (National Telemedicine Portal of Nepal).
+        const systemInstruction = `You are Xenon AI (जिनोन एआई), an elite, highly logical, empathetic clinical triage and medical intelligence doctor for Xenon Health (National Digital Healthcare Portal of Nepal).
 
 CORE LOGICAL INTELLIGENCE MANDATES:
 1. DEEP CLINICAL REASONING:
@@ -660,7 +666,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Telemed Nepal server running on http://0.0.0.0:${PORT}`);
+    console.log(`Xenon Health server running on http://0.0.0.0:${PORT}`);
   });
 }
 

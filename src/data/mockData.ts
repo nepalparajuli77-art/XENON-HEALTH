@@ -3,12 +3,12 @@ import { Doctor, Hospital, Appointment, Prescription, EmergencyContact, User, La
 export const INITIAL_USERS: User[] = [
   {
     id: "usr_001",
-    username: "admin",
-    role: "admin",
-    full_name: "System Administrator",
+    username: "staff",
+    role: "staff",
+    full_name: "Hospital Staff (Medical Support)",
     phone: "+977-9801234567",
-    email: "admin@xenonhealth.org.np",
-    password: "1admin234"
+    email: "staff@xenonhealth.org.np",
+    password: "12admin34"
   }
 ];
 
@@ -625,6 +625,78 @@ export const INITIAL_HOSPITALS: Hospital[] = [
     open_247: true,
     rating: 4.2,
     description: "Post-graduate clinical medical academy and national emergency referral hub."
+  },
+  {
+    id: "hosp_016",
+    name: "Shahid Gangalal National Heart Centre",
+    name_np: "शहीद गंगालाल राष्ट्रिय हृदय केन्द्र",
+    address: "Bansbari, Kathmandu",
+    district: "Kathmandu",
+    phone: "+977-01-4371322",
+    emergency: "+977-01-4371374",
+    email: "info@sgnhc.org.np",
+    website: "https://sgnhc.org.np",
+    type: "Government",
+    beds: 250,
+    icu: true,
+    specialties: ["Cardiology", "Cardiothoracic Surgery", "Pediatric Cardiology", "Cardiac ICU"],
+    open_247: true,
+    rating: 4.9,
+    description: "Nepal's national apex referral center for cardiac and cardiothoracic procedures."
+  },
+  {
+    id: "hosp_017",
+    name: "Tilganga Institute of Ophthalmology",
+    name_np: "तिलगंगा आँखा प्रतिष्ठान",
+    address: "Gaushala, Kathmandu",
+    district: "Kathmandu",
+    phone: "+977-01-4493775",
+    emergency: "+977-01-4493684",
+    email: "info@tilganga.org",
+    website: "https://tilganga.org",
+    type: "Non-Profit",
+    beds: 100,
+    icu: false,
+    specialties: ["Ophthalmology", "Cataract Surgery", "Cornea & Refractive", "Retina Care"],
+    open_247: false,
+    rating: 4.9,
+    description: "World-renowned eye hospital founded by Dr. Sanduk Ruit delivering high-volume cataract and corneal surgeries."
+  },
+  {
+    id: "hosp_018",
+    name: "B&B Hospital",
+    name_np: "बी एण्ड बी अस्पताल",
+    address: "Gwarko, Lalitpur",
+    district: "Lalitpur",
+    phone: "+977-01-5531930",
+    emergency: "+977-01-5531932",
+    email: "info@bbhospital.com.np",
+    website: "https://bbhospital.com.np",
+    type: "Private",
+    beds: 150,
+    icu: true,
+    specialties: ["Orthopedics", "Trauma Care", "Urology", "Neurosurgery"],
+    open_247: true,
+    rating: 4.7,
+    description: "Pioneering surgical hospital recognized across South Asia for orthopedic joint replacements and trauma surgery."
+  },
+  {
+    id: "hosp_019",
+    name: "Sukraraj Tropical & Infectious Disease Hospital",
+    name_np: "शुक्रराज ट्रपिकल तथा सरुवारोग अस्पताल (टेकु)",
+    address: "Teku, Kathmandu",
+    district: "Kathmandu",
+    phone: "+977-01-4253396",
+    emergency: "+977-01-4253397",
+    email: "info@stidh.gov.np",
+    website: "https://stidh.gov.np",
+    type: "Government",
+    beds: 100,
+    icu: true,
+    specialties: ["Infectious Diseases", "Rabies Prophylaxis (ARV)", "Snakebite Treatment", "Dengue & Fevers"],
+    open_247: true,
+    rating: 4.5,
+    description: "Central national infectious disease center offering 24/7 rabies post-exposure vaccines and anti-snake venom."
   }
 ];
 
