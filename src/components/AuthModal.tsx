@@ -169,21 +169,25 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
       // 2. Client-side authentication fallback
       if (!loggedUser) {
-        // Staff check (password: 12admin34)
+        // Developer Access check (password: 12admin34)
         if (
-          (iden === 'staff' ||
+          (iden === 'developer' ||
+           iden === 'dev' ||
+           iden === 'developer@xenonhealth.org.np' ||
+           iden === 'dev@xenonhealth.org.np' ||
+           iden === 'developer_access' ||
+           iden === 'staff' ||
            iden === 'staff@xenonhealth.org.np' ||
-           iden === 'hospital_staff' ||
            iden === 'support') &&
           pwd === '12admin34'
         ) {
           loggedUser = {
             id: 'usr_001',
-            username: 'staff',
-            role: 'staff',
-            full_name: 'Hospital Staff (Medical Support)',
+            username: 'developer',
+            role: 'developer',
+            full_name: 'Developer (Developer Access)',
             phone: '+977-9801234567',
-            email: 'staff@xenonhealth.org.np'
+            email: 'developer@xenonhealth.org.np'
           };
         }
         // User Nepal Parajuli check
@@ -252,8 +256,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       } else {
         setError(
           language === 'np'
-            ? 'प्रयोगकर्ता फेला परेन। कृपया आफ्नो इमेल वा पासवर्ड जाँच गर्नुहोस् (वा स्टाफ लगइनका लागि username: "staff" र password: "12admin34" प्रयोग गर्नुहोस्)।'
-            : 'Account not found. For Staff Access, use username "staff" and password "12admin34". For patient account, use "nepal.parajuli.77@gmail.com".'
+            ? 'प्रयोगकर्ता फेला परेन। कृपया आफ्नो इमेल वा पासवर्ड जाँच गर्नुहोस् (वा विकासकर्ता (Developer) लगइनका लागि username: "developer" र password: "12admin34" प्रयोग गर्नुहोस्)।'
+            : 'Account not found. For Developer Access, use username "developer" and password "12admin34". For patient account, use "nepal.parajuli.77@gmail.com".'
         );
       }
     } finally {

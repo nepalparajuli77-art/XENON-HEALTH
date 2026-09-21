@@ -3,11 +3,11 @@ import { Doctor, Hospital, Appointment, Prescription, EmergencyContact, User, La
 export const INITIAL_USERS: User[] = [
   {
     id: "usr_001",
-    username: "staff",
-    role: "staff",
-    full_name: "Hospital Staff (Medical Support)",
+    username: "developer",
+    role: "developer",
+    full_name: "Developer (Developer Access)",
     phone: "+977-9801234567",
-    email: "staff@xenonhealth.org.np",
+    email: "developer@xenonhealth.org.np",
     password: "12admin34"
   }
 ];

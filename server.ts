@@ -306,7 +306,7 @@ function getClinicalFallbackResponse(prompt: string, language: 'en' | 'np' = 'en
 interface ServerUser {
   id: string;
   username: string;
-  role: 'patient' | 'doctor' | 'staff';
+  role: 'patient' | 'doctor' | 'developer';
   full_name: string;
   phone: string;
   email: string;
@@ -328,11 +328,11 @@ interface ServerUser {
 const SERVER_USERS: ServerUser[] = [
   {
     id: "usr_001",
-    username: "staff",
-    role: "staff",
-    full_name: "Hospital Staff (Medical Support)",
+    username: "developer",
+    role: "developer",
+    full_name: "Developer (Developer Access)",
     phone: "+977-9801234567",
-    email: "staff@xenonhealth.org.np",
+    email: "developer@xenonhealth.org.np",
     password: "12admin34",
     created_at: new Date().toISOString()
   },
@@ -361,23 +361,26 @@ app.post('/api/auth/login', (req, res) => {
   const cleanId = String(identifier).trim().toLowerCase();
   const cleanPwd = String(password).trim();
 
-  // 1. Direct Staff credential check (as requested: staff user with password 12admin34)
+  // 1. Direct Developer credential check (developer with password 12admin34)
   if (
-    (cleanId === 'staff' ||
-     cleanId === 'staff@xenonhealth.org.np' ||
-     cleanId === 'hospital_staff' ||
+    (cleanId === 'developer' ||
+     cleanId === 'dev' ||
+     cleanId === 'developer@xenonhealth.org.np' ||
+     cleanId === 'dev@xenonhealth.org.np' ||
+     cleanId === 'developer_access' ||
+     cleanId === 'staff' ||
      cleanId === 'support') &&
     cleanPwd === '12admin34'
   ) {
-    const staffUser = SERVER_USERS.find(u => u.username === 'staff') || {
+    const devUser = SERVER_USERS.find(u => u.username === 'developer') || {
       id: "usr_001",
-      username: "staff",
-      role: "staff" as const,
-      full_name: "Hospital Staff (Medical Support)",
+      username: "developer",
+      role: "developer" as const,
+      full_name: "Developer (Developer Access)",
       phone: "+977-9801234567",
-      email: "staff@xenonhealth.org.np"
+      email: "developer@xenonhealth.org.np"
     };
-    const { password: _, ...safeUser } = staffUser;
+    const { password: _, ...safeUser } = devUser;
     return res.json({ success: true, user: safeUser });
   }
 
@@ -416,11 +419,11 @@ app.post('/api/auth/login', (req, res) => {
   );
 
   if (!user) {
-    return res.status(401).json({ error: 'User not found. Use "staff" with password "12admin34", or "nepal.parajuli.77@gmail.com".' });
+    return res.status(401).json({ error: 'User not found. Use "developer" with password "12admin34", or "nepal.parajuli.77@gmail.com".' });
   }
 
   if (user.password && user.password !== cleanPwd && cleanPwd !== '12admin34' && cleanPwd !== '1admin234') {
-    return res.status(401).json({ error: 'Invalid password. Try "12admin34" for staff.' });
+    return res.status(401).json({ error: 'Invalid password. Try "12admin34" for developer access.' });
   }
 
   const { password: _, ...safeUser } = user;

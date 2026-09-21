@@ -64,7 +64,7 @@ export default function App() {
             u.full_name !== 'Bina Pokharel' &&
             u.full_name !== 'Bina Pokhrel'
         );
-        if (!cleaned.some((u) => u.username === 'staff' || u.role === 'staff')) {
+        if (!cleaned.some((u) => u.username === 'developer' || u.role === 'developer')) {
           cleaned.unshift(INITIAL_USERS[0]);
         }
         localStorage.setItem('xenon_users', JSON.stringify(cleaned));

@@ -145,7 +145,7 @@ export interface EmergencyContact {
 export interface User {
   id: string;
   username: string;
-  role: 'patient' | 'doctor' | 'staff';
+  role: 'patient' | 'doctor' | 'developer';
   full_name: string;
   phone: string;
   email: string;
