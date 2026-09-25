@@ -91,19 +91,17 @@ export default function App() {
       if (saved) {
         const parsed = JSON.parse(saved) as User;
         if (
-          parsed.username === 'patient_bina' ||
-          parsed.full_name === 'Bina Pokharel' ||
-          parsed.full_name === 'Bina Pokhrel'
+          parsed.username !== 'patient_bina' &&
+          parsed.full_name !== 'Bina Pokharel' &&
+          parsed.full_name !== 'Bina Pokhrel'
         ) {
-          localStorage.removeItem('telemed_current_user');
-          return null;
+          return parsed;
         }
-        return parsed;
       }
     } catch (e) {
       console.warn('Failed to parse cached user', e);
     }
-    return null;
+    return INITIAL_USERS[0];
   });
 
   const [doctors, setDoctors] = useState<Doctor[]>(() => {
@@ -214,21 +212,9 @@ export default function App() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [activeVideoAppointment, setActiveVideoAppointment] = useState<Appointment | null>(null);
 
-  // When the site is first operated, open directly to registration, then only to the app!
-  const [authModalOpen, setAuthModalOpen] = useState<boolean>(() => {
-    try {
-      return localStorage.getItem('telemed_site_operated') !== 'true';
-    } catch {
-      return true;
-    }
-  });
-  const [authModalMode, setAuthModalMode] = useState<'login' | 'register-doctor' | 'register-patient'>(() => {
-    try {
-      return localStorage.getItem('telemed_site_operated') !== 'true' ? 'register-patient' : 'login';
-    } catch {
-      return 'register-patient';
-    }
-  });
+  // Auth Modal state
+  const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'register-doctor' | 'register-patient'>('login');
 
   // Notification Toast State
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -565,20 +551,16 @@ export default function App() {
       />
 
       <AuthModal
-        isOpen={authModalOpen || !currentUser}
+        isOpen={authModalOpen}
         initialMode={authModalMode}
-        onClose={() => {
-          if (currentUser) {
-            setAuthModalOpen(false);
-          }
-        }}
+        onClose={() => setAuthModalOpen(false)}
         onLoginSuccess={handleLoginSuccess}
         onDoctorRegistered={handleDoctorRegistered}
         onPatientRegistered={handlePatientRegistered}
         hospitals={hospitals}
         existingUsers={users}
         language={language}
-        isFirstVisit={!hasOperatedSite}
+        isFirstVisit={false}
         currentUser={currentUser}
       />
 
