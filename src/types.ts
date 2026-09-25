@@ -142,6 +142,36 @@ export interface EmergencyContact {
   unavailableReason?: string;
 }
 
+export interface UserVitals {
+  bp?: string;
+  blood_sugar?: string;
+  sp_o2?: string;
+  heart_rate?: string;
+  weight_kg?: string;
+  temperature?: string;
+  height_cm?: string;
+  bmi?: string;
+  last_updated?: string;
+}
+
+export interface UserHealthRecord {
+  id: string;
+  user_id: string;
+  user_name: string;
+  title: string;
+  category: 'Prescription' | 'Lab Report' | 'Vaccination' | 'Discharge Summary' | 'Vitals Log' | 'X-Ray / Scan' | 'Other';
+  date: string;
+  file_name?: string;
+  file_size?: string;
+  file_type?: string;
+  file_data_url?: string;
+  notes?: string;
+  vitals?: UserVitals;
+  ai_insights?: string;
+  tags?: string[];
+  created_at: string;
+}
+
 export interface User {
   id: string;
   username: string;
@@ -156,10 +186,13 @@ export interface User {
   address?: string;
   district?: string;
   allergies?: string[];
+  chronic_conditions?: string[];
   emergency_contact?: string;
   nmc_number?: string;
   specialty?: string;
   hospital?: string;
   degrees?: string;
   created_at?: string;
+  vitals?: UserVitals;
 }
+

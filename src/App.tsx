@@ -329,6 +329,25 @@ export default function App() {
     showToast(`Patient registered! Welcome, ${newPatient.full_name} (PID: ${newPatient.id}).`);
   };
 
+  const handleUpdateUser = (updatedUser: User) => {
+    setCurrentUser(updatedUser);
+    setUsers((prev) => {
+      const updated = prev.map((u) => (u.id === updatedUser.id ? updatedUser : u));
+      try {
+        localStorage.setItem('xenon_users', JSON.stringify(updated));
+      } catch (e) {
+        console.warn(e);
+      }
+      return updated;
+    });
+    try {
+      localStorage.setItem('telemed_current_user', JSON.stringify(updatedUser));
+    } catch (e) {
+      console.warn(e);
+    }
+    showToast(`Health profile updated for ${updatedUser.full_name}!`);
+  };
+
   const handleLogout = () => {
     setCurrentUser(null);
     try {
@@ -439,6 +458,7 @@ export default function App() {
               onOpenVideoRoom={handleOpenVideoRoom}
               currentUser={currentUser}
               onOpenAuth={handleOpenAuth}
+              onUpdateUser={handleUpdateUser}
             />
           )}
 
