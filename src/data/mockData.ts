@@ -2,10 +2,24 @@ import { Doctor, Hospital, Appointment, Prescription, EmergencyContact, User, La
 
 export const INITIAL_USERS: User[] = [
   {
+    id: "usr_nepal",
+    username: "nepal",
+    role: "patient",
+    full_name: "Nepal Parajuli",
+    phone: "+977-9841234567",
+    email: "nepal.parajuli.77@gmail.com",
+    password: "aarav*3812",
+    district: "Kathmandu",
+    blood_group: "O+",
+    age: 28,
+    gender: "Male",
+    emergency_contact: "+977-9841234567"
+  },
+  {
     id: "usr_001",
     username: "developer",
     role: "developer",
-    full_name: "Developer (Developer Access)",
+    full_name: "Developer (Admin & Operations)",
     phone: "+977-9801234567",
     email: "developer@xenonhealth.org.np",
     password: "12admin34"
@@ -28,7 +42,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 5.0,
     reviews_count: 340,
     languages: ["Nepali", "English", "Hindi"],
-    schedule: "Sun - Thu (09:00 AM - 03:00 PM)"
+    schedule: "Sun - Thu (09:00 AM - 03:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_002",
@@ -45,7 +60,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 5.0,
     reviews_count: 412,
     languages: ["Nepali", "English", "Tibetan"],
-    schedule: "Mon - Fri (08:30 AM - 02:30 PM)"
+    schedule: "Mon - Fri (08:30 AM - 02:30 PM)",
+    pin: "1234"
   },
   {
     id: "doc_003",
@@ -62,7 +78,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.9,
     reviews_count: 280,
     languages: ["Nepali", "English"],
-    schedule: "Sun, Tue, Thu (08:00 AM - 02:00 PM)"
+    schedule: "Sun, Tue, Thu (08:00 AM - 02:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_004",
@@ -79,7 +96,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.9,
     reviews_count: 265,
     languages: ["Nepali", "English", "Maithili"],
-    schedule: "Sun - Fri (09:00 AM - 04:00 PM)"
+    schedule: "Sun - Fri (09:00 AM - 04:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_005",
@@ -96,7 +114,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.8,
     reviews_count: 190,
     languages: ["Nepali", "English"],
-    schedule: "Mon - Thu (10:00 AM - 03:00 PM)"
+    schedule: "Mon - Thu (10:00 AM - 03:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_006",
@@ -113,7 +132,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.9,
     reviews_count: 215,
     languages: ["Nepali", "English", "Newari"],
-    schedule: "Tue, Thu, Sat (11:00 AM - 04:00 PM)"
+    schedule: "Tue, Thu, Sat (11:00 AM - 04:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_007",
@@ -130,7 +150,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.8,
     reviews_count: 142,
     languages: ["Nepali", "English", "Newari"],
-    schedule: "Mon - Fri (09:00 AM - 03:00 PM)"
+    schedule: "Mon - Fri (09:00 AM - 03:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_008",
@@ -147,7 +168,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.7,
     reviews_count: 98,
     languages: ["Nepali", "English"],
-    schedule: "Sun, Tue, Thu (11:00 AM - 05:00 PM)"
+    schedule: "Sun, Tue, Thu (11:00 AM - 05:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_009",
@@ -164,7 +186,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.9,
     reviews_count: 164,
     languages: ["Nepali", "English", "Maithili"],
-    schedule: "Sun - Fri (08:30 AM - 02:30 PM)"
+    schedule: "Sun - Fri (08:30 AM - 02:30 PM)",
+    pin: "1234"
   },
   {
     id: "doc_010",
@@ -181,7 +204,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.9,
     reviews_count: 88,
     languages: ["Nepali", "English"],
-    schedule: "Tue, Wed, Fri (12:00 PM - 06:00 PM)"
+    schedule: "Tue, Wed, Fri (12:00 PM - 06:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_011",
@@ -198,7 +222,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.7,
     reviews_count: 85,
     languages: ["Nepali", "English", "Newari"],
-    schedule: "Sun - Thu (10:00 AM - 04:00 PM)"
+    schedule: "Sun - Thu (10:00 AM - 04:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_012",
@@ -215,7 +240,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.6,
     reviews_count: 220,
     languages: ["Nepali", "English", "Hindi"],
-    schedule: "Sun - Fri (09:00 AM - 02:00 PM)"
+    schedule: "Sun - Fri (09:00 AM - 02:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_013",
@@ -232,7 +258,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.8,
     reviews_count: 95,
     languages: ["Nepali", "English", "Gurung"],
-    schedule: "Mon - Thu (11:00 AM - 05:00 PM)"
+    schedule: "Mon - Thu (11:00 AM - 05:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_014",
@@ -249,7 +276,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.7,
     reviews_count: 65,
     languages: ["Nepali", "English"],
-    schedule: "Sun, Mon, Wed, Fri (10:00 AM - 04:00 PM)"
+    schedule: "Sun, Mon, Wed, Fri (10:00 AM - 04:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_015",
@@ -266,7 +294,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.6,
     reviews_count: 79,
     languages: ["Nepali", "English"],
-    schedule: "Sun - Thu (09:30 AM - 03:30 PM)"
+    schedule: "Sun - Thu (09:30 AM - 03:30 PM)",
+    pin: "1234"
   },
   {
     id: "doc_016",
@@ -283,7 +312,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.8,
     reviews_count: 105,
     languages: ["Nepali", "English"],
-    schedule: "Sun - Fri (08:00 AM - 01:00 PM)"
+    schedule: "Sun - Fri (08:00 AM - 01:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_017",
@@ -300,7 +330,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.9,
     reviews_count: 115,
     languages: ["Nepali", "English", "Bhojpuri"],
-    schedule: "Tue, Thu, Sat (01:00 PM - 06:00 PM)"
+    schedule: "Tue, Thu, Sat (01:00 PM - 06:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_018",
@@ -317,7 +348,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.9,
     reviews_count: 92,
     languages: ["Nepali", "English", "Hindi"],
-    schedule: "Mon, Wed, Fri (11:00 AM - 05:00 PM)"
+    schedule: "Mon, Wed, Fri (11:00 AM - 05:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_019",
@@ -334,7 +366,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.8,
     reviews_count: 82,
     languages: ["Nepali", "English"],
-    schedule: "Sun - Fri (09:00 AM - 03:00 PM)"
+    schedule: "Sun - Fri (09:00 AM - 03:00 PM)",
+    pin: "1234"
   },
   {
     id: "doc_020",
@@ -351,7 +384,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     rating: 4.6,
     reviews_count: 67,
     languages: ["Nepali", "English", "Newari"],
-    schedule: "Sun - Thu (09:00 AM - 02:00 PM)"
+    schedule: "Sun - Thu (09:00 AM - 02:00 PM)",
+    pin: "1234"
   }
 ];
 
@@ -706,181 +740,36 @@ export const INITIAL_PRESCRIPTIONS: Prescription[] = [
   {
     id: "rx_001",
     appointment_id: "apt_prev_01",
-    patient_username: "user_patient_demo",
-    patient_name: "Ram Sharan Parajuli",
-    doctor_id: "doc_001",
+    patient_username: "nepal",
+    patient_name: "Nepal Parajuli",
+    doctor_id: "doc_004",
     doctor_name: "Dr. Om Murti Anil",
     specialty: "Senior Consultant Cardiologist",
-    date: "2026-09-18",
-    diagnosis: "Essential Hypertension (Stage 1) & Mild Hyperlipidemia",
+    date: "2026-09-22",
+    diagnosis: "Routine Cardiology Review & Optimal BP Maintenance",
     vitals: {
-      bp: "138/88 mmHg",
-      pulse: "76 bpm",
-      weight_kg: 71,
-      sp_o2: "98%"
-    },
-    medicines: [
-      {
-        name: "Tab. Telmisartan",
-        dosage: "40 mg",
-        frequency: "1-0-0 (Morning - After Breakfast)",
-        duration: "30 Days",
-        instructions: "Take once daily in the morning with a full glass of water. Do not skip."
-      },
-      {
-        name: "Tab. Metformin HCl",
-        dosage: "500 mg",
-        frequency: "1-0-1 (Morning & Night - After Meals)",
-        duration: "30 Days",
-        instructions: "Take immediately following meals to minimize gastrointestinal discomfort."
-      },
-      {
-        name: "Cap. Pantoprazole",
-        dosage: "40 mg",
-        frequency: "1-0-0 (Morning - 30 mins Before Food)",
-        duration: "14 Days",
-        instructions: "Empty stomach (खाली पेट) every morning with warm water."
-      },
-      {
-        name: "Tab. Rosuvastatin",
-        dosage: "10 mg",
-        frequency: "0-0-1 (Night - Bedtime)",
-        duration: "30 Days",
-        instructions: "Take 1 tablet every night at bedtime."
-      }
-    ],
-    lab_investigations: ["Serum Electrolytes (Na/K)", "Fasting Lipid Profile", "HbA1c & Serum Creatinine"],
-    lifestyle_advice: "Adopt low sodium diet (<3g salt/day). 30 mins daily brisk walk. Avoid saturated oils and spicy street foods.",
-    follow_up_date: "2026-10-18"
-  },
-  {
-    id: "rx_002",
-    appointment_id: "apt_prev_02",
-    patient_username: "user_patient_demo",
-    patient_name: "Ram Sharan Parajuli",
-    doctor_id: "doc_009",
-    doctor_name: "Dr. Priya Karki",
-    specialty: "Pediatrics & Child Health",
-    date: "2026-09-15",
-    diagnosis: "Upper Respiratory Tract Infection & Seasonal Allergic Rhinitis",
-    vitals: {
-      pulse: "82 bpm",
+      bp: "120/80 mmHg",
+      pulse: "74 bpm",
       weight_kg: 68,
       sp_o2: "99%"
     },
     medicines: [
       {
-        name: "Tab. Montelukast + Levocetirizine",
-        dosage: "10mg / 5mg",
-        frequency: "0-0-1 (Night - After Dinner)",
-        duration: "10 Days",
-        instructions: "Take before sleeping. May cause mild drowsiness."
-      },
-      {
-        name: "Tab. Paracetamol (Napa / Calpol)",
+        name: "Cap. Vitamin C + Zinc",
         dosage: "500 mg",
-        frequency: "1 Tab SOS (Max 3/day - For Fever/Bodyache)",
-        duration: "5 Days",
-        instructions: "Take only if body temperature exceeds 100°F or severe headache."
+        frequency: "1-0-0 (Morning - After Breakfast)",
+        duration: "30 Days",
+        instructions: "Take once daily with water to support immunity."
       }
     ],
-    lifestyle_advice: "Steam inhalation twice daily. Gargle with warm saline water.",
-    follow_up_date: "2026-09-25"
+    lifestyle_advice: "Maintain 3-4 liters daily water intake in high altitudes. 20-min daily brisk walks.",
+    follow_up_date: "2026-10-22"
   }
 ];
 
-export const INITIAL_FAMILY_MEMBERS: FamilyMember[] = [
-  {
-    id: "fam_001",
-    name: "Ram Sharan Parajuli",
-    relation: "Father",
-    age: 62,
-    gender: "Male",
-    blood_group: "B+",
-    chronic_conditions: ["Hypertension", "Type 2 Diabetes"],
-    allergies: ["Penicillin"],
-    vaccinations: [
-      { name: "COVID-19 Booster (Vero Cell)", date: "2023-04-12", status: "Completed" },
-      { name: "Influenza Flu Vaccine", date: "2024-09-10", status: "Completed" },
-      { name: "Pneumococcal Vaccine", date: "2025-01-15", status: "Due Soon" }
-    ],
-    emergency_notes: "Takes Telmisartan 40mg and Metformin 500mg daily. Monitors BP every morning."
-  },
-  {
-    id: "fam_002",
-    name: "Sita Devi Parajuli",
-    relation: "Mother",
-    age: 58,
-    gender: "Female",
-    blood_group: "O+",
-    chronic_conditions: ["Hypothyroidism", "Knee Osteoarthritis"],
-    allergies: ["Sulfa drugs"],
-    vaccinations: [
-      { name: "COVID-19 Booster", date: "2023-04-12", status: "Completed" },
-      { name: "Hepatitis B (3 Doses)", date: "2021-08-20", status: "Completed" }
-    ],
-    emergency_notes: "Takes Thyroxine 50mcg on an empty stomach every morning."
-  },
-  {
-    id: "fam_003",
-    name: "Aryan Parajuli",
-    relation: "Son",
-    age: 5,
-    gender: "Male",
-    blood_group: "O+",
-    chronic_conditions: [],
-    allergies: ["Dust mite"],
-    vaccinations: [
-      { name: "BCG & Polio (OPV)", date: "2021-02-10", status: "Completed" },
-      { name: "Pentavalent (DPT-HepB-Hib)", date: "2021-06-15", status: "Completed" },
-      { name: "Measles-Rubella (MR-1 & MR-2)", date: "2022-03-10", status: "Completed" },
-      { name: "Typhoid Conjugate Vaccine", date: "2022-09-05", status: "Completed" }
-    ],
-    emergency_notes: "Up to date with Nepal National Immunization Program schedule."
-  }
-];
+export const INITIAL_FAMILY_MEMBERS: FamilyMember[] = [];
 
-export const INITIAL_LAB_REPORTS: LabReport[] = [
-  {
-    id: "lab_001",
-    patient_name: "Ram Sharan Parajuli",
-    family_member_id: "fam_001",
-    test_name: "Comprehensive Lipid & Fasting Blood Glucose Panel",
-    test_date: "2026-08-14",
-    lab_name: "National Public Health Laboratory (Teku) / Norvic Diagnostics",
-    doctor_ref: "Dr. Om Murti Anil",
-    status: "Completed",
-    biomarkers: [
-      { parameter: "Fasting Blood Sugar (FBS)", value: 132, unit: "mg/dL", reference_range: "70 - 100", status: "High" },
-      { parameter: "HbA1c (Glycated Hemoglobin)", value: 7.1, unit: "%", reference_range: "4.0 - 5.6", status: "High" },
-      { parameter: "Total Cholesterol", value: 228, unit: "mg/dL", reference_range: "< 200", status: "High" },
-      { parameter: "HDL (Good Cholesterol)", value: 48, unit: "mg/dL", reference_range: "> 40", status: "Normal" },
-      { parameter: "LDL (Bad Cholesterol)", value: 146, unit: "mg/dL", reference_range: "< 100", status: "High" },
-      { parameter: "Triglycerides", value: 170, unit: "mg/dL", reference_range: "< 150", status: "High" }
-    ],
-    ai_summary: "Elevated Fasting Blood Sugar (132 mg/dL) and HbA1c (7.1%) indicate moderate diabetic glycemic elevation. Total Cholesterol and LDL are borderline elevated. Recommended: continue diabetic diet restriction, 30-minute daily morning walks, and consult Dr. Om Murti Anil for Metformin dose optimization.",
-    ai_summary_np: "रगतमा चिनीको मात्रा (१३२ mg/dL) र HbA1c (७.१%) केही बढेको देखिएको छ। कोलेस्ट्रोल पनि सामान्यभन्दा बढी छ। दैनिक ३० मिनेट हिँड्न र डाक्टरको सल्लाहअनुसार औषधि मिलाउनुहोस्।"
-  },
-  {
-    id: "lab_002",
-    patient_name: "Sita Devi Parajuli",
-    family_member_id: "fam_002",
-    test_name: "Complete Blood Count (CBC) & Thyroid Panel (TSH)",
-    test_date: "2026-09-02",
-    lab_name: "Patan Hospital Clinical Pathology",
-    doctor_ref: "Dr. Laxmi Subedi",
-    status: "Completed",
-    biomarkers: [
-      { parameter: "Hemoglobin (Hb)", value: 13.4, unit: "g/dL", reference_range: "12.0 - 15.5", status: "Normal" },
-      { parameter: "Total Leukocyte Count (WBC)", value: 6800, unit: "/cumm", reference_range: "4000 - 11000", status: "Normal" },
-      { parameter: "Platelet Count", value: 245000, unit: "/cumm", reference_range: "150000 - 450000", status: "Normal" },
-      { parameter: "Thyroid Stimulating Hormone (TSH)", value: 3.2, unit: "mIU/L", reference_range: "0.4 - 4.5", status: "Normal" },
-      { parameter: "Serum Creatinine", value: 0.8, unit: "mg/dL", reference_range: "0.6 - 1.2", status: "Normal" }
-    ],
-    ai_summary: "All CBC and thyroid markers are within healthy reference ranges. TSH is well-stabilized at 3.2 mIU/L under current Thyroxine 50mcg replacement therapy.",
-    ai_summary_np: "सबै रक्त परीक्षण र थाइराइड (TSH) रिपोर्ट सामान्य छ। थाइरोक्सिन ५०mcg औषधि नियमित जारी राख्नुहोस्।"
-  }
-];
+export const INITIAL_LAB_REPORTS: LabReport[] = [];
 
 export const INITIAL_EMERGENCY_CONTACTS: EmergencyContact[] = [
   {

@@ -16,6 +16,7 @@ export interface Doctor {
   reviews_count?: number;
   languages: string[];
   schedule: string;
+  pin?: string;
 }
 
 export interface Hospital {

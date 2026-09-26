@@ -6,6 +6,8 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { DashboardView } from './components/DashboardView';
+import { DoctorPortalView } from './components/DoctorPortalView';
+import { DeveloperConsoleView } from './components/DeveloperConsoleView';
 import { DoctorsView } from './components/DoctorsView';
 import { HospitalsView } from './components/HospitalsView';
 import { PatientRecordsView } from './components/PatientRecordsView';
@@ -57,15 +59,22 @@ export default function App() {
       const saved = localStorage.getItem('xenon_users') || localStorage.getItem('telemed_users');
       if (saved) {
         const parsed = JSON.parse(saved) as User[];
-        // Purge Bina Pokharel and keep staff/doctors
+        // Filter out legacy mock accounts
         const cleaned = parsed.filter(
           (u) =>
             u.username !== 'patient_bina' &&
             u.full_name !== 'Bina Pokharel' &&
-            u.full_name !== 'Bina Pokhrel'
+            u.full_name !== 'Bina Pokhrel' &&
+            u.username !== 'user_patient_demo' &&
+            u.full_name !== 'Ram Sharan Parajuli'
         );
-        if (!cleaned.some((u) => u.username === 'developer' || u.role === 'developer')) {
+        // Ensure Nepal Parajuli is present
+        if (!cleaned.some((u) => u.username === 'nepal')) {
           cleaned.unshift(INITIAL_USERS[0]);
+        }
+        // Ensure Developer is present
+        if (!cleaned.some((u) => u.username === 'developer' || u.role === 'developer')) {
+          cleaned.push(INITIAL_USERS[1]);
         }
         localStorage.setItem('xenon_users', JSON.stringify(cleaned));
         return cleaned;
@@ -93,7 +102,8 @@ export default function App() {
         if (
           parsed.username !== 'patient_bina' &&
           parsed.full_name !== 'Bina Pokharel' &&
-          parsed.full_name !== 'Bina Pokhrel'
+          parsed.full_name !== 'Bina Pokhrel' &&
+          parsed.username !== 'user_patient_demo'
         ) {
           return parsed;
         }
@@ -164,7 +174,7 @@ export default function App() {
 
   const [labReports, setLabReports] = useState<LabReport[]>(() => {
     try {
-      const saved = localStorage.getItem('telemed_lab_reports');
+      const saved = localStorage.getItem('xenon_custom_lab_reports');
       if (saved) {
         return JSON.parse(saved) as LabReport[];
       }
@@ -178,13 +188,49 @@ export default function App() {
     setLabReports((prev) => {
       const updated = [newReport, ...prev];
       try {
-        localStorage.setItem('telemed_lab_reports', JSON.stringify(updated));
+        localStorage.setItem('xenon_custom_lab_reports', JSON.stringify(updated));
       } catch (e) {
         console.warn(e);
       }
       return updated;
     });
     showToast(`Analyzed and archived report for ${newReport.test_name}!`);
+  };
+
+  const handleAddDoctor = (newDoc: Doctor) => {
+    setDoctors((prev) => {
+      const updated = [newDoc, ...prev];
+      try {
+        localStorage.setItem('telemed_doctors', JSON.stringify(updated));
+      } catch (e) {
+        console.warn(e);
+      }
+      return updated;
+    });
+  };
+
+  const handleUpdateDoctor = (updatedDoc: Doctor) => {
+    setDoctors((prev) => {
+      const updated = prev.map((d) => (d.id === updatedDoc.id ? updatedDoc : d));
+      try {
+        localStorage.setItem('telemed_doctors', JSON.stringify(updated));
+      } catch (e) {
+        console.warn(e);
+      }
+      return updated;
+    });
+  };
+
+  const handleDeleteDoctor = (doctorId: string) => {
+    setDoctors((prev) => {
+      const updated = prev.filter((d) => d.id !== doctorId);
+      try {
+        localStorage.setItem('telemed_doctors', JSON.stringify(updated));
+      } catch (e) {
+        console.warn(e);
+      }
+      return updated;
+    });
   };
 
   // Keep appointment statuses synced on schedule / mount
@@ -457,11 +503,34 @@ export default function App() {
           )}
 
           {currentTab === 'doctors' && (
-            <DoctorsView
+            <DoctorPortalView
               doctors={doctors}
+              appointments={appointments}
+              prescriptions={prescriptions}
+              labReports={labReports}
               language={language}
-              onBookDoctor={(doc) => handleOpenBookModal(doc)}
-              onOpenDoctorRegister={() => handleOpenAuth('register-doctor')}
+              onOpenVideoRoom={handleOpenVideoRoom}
+              onIssueRxClick={() => setIssueRxModalOpen(true)}
+              onNavigateToXenon={() => setCurrentTab('xenon')}
+            />
+          )}
+
+          {currentTab === 'developer' && (
+            <DeveloperConsoleView
+              doctors={doctors}
+              users={users}
+              appointments={appointments}
+              prescriptions={prescriptions}
+              labReports={labReports}
+              language={language}
+              onAddDoctor={handleAddDoctor}
+              onUpdateDoctor={handleUpdateDoctor}
+              onDeleteDoctor={handleDeleteDoctor}
+              onSwitchUserSession={(user) => {
+                setCurrentUser(user);
+                showToast(`Switched session to ${user.full_name} (${user.role})`);
+              }}
+              onNavigate={setCurrentTab}
             />
           )}
 
